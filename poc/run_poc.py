@@ -27,7 +27,9 @@ def table(header, rows):
     """Return a Markdown table."""
     lines = ["| " + " | ".join(header) + " |",
              "|" + "---|" * len(header)]
-    lines += ["| " + " | ".join(str(cell).replace("|", "\\|")
+    # Cells are kept on one line, or the table breaks.
+    lines += ["| " + " | ".join(" ".join(str(cell).split())
+                                .replace("|", "\\|")
                                 for cell in row) + " |" for row in rows]
     return "\n".join(lines)
 

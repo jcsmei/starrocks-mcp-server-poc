@@ -1,5 +1,7 @@
 # StarRocks PoC: governed AI-agent access to marketing analytics
 
+[![StarRocks PoC](https://github.com/jcsmei/starrocks-agentic-poc/actions/workflows/poc.yml/badge.svg)](https://github.com/jcsmei/starrocks-agentic-poc/actions/workflows/poc.yml)
+
 A proof of concept that loads multi-tab marketing workbooks into
 StarRocks as a small star schema, and gives an AI agent read-only
 access to it through StarRocks's official MCP server.
@@ -8,6 +10,10 @@ Every push runs the whole PoC against a real StarRocks in GitHub
 Actions: schema, load, data quality checks, query plans, the core
 business questions, and the MCP server used as an agent would use it.
 The results appear on each run's summary page.
+
+**Read the [PoC report](docs/poc_report.md)** for the objective,
+success criteria, design decisions, results, issues met and
+recommendations for production.
 
 ## What it shows
 
@@ -42,6 +48,7 @@ flowchart LR
 | `poc/mcp_check.py` | Starts the official MCP server as the read-only user, uses its tools, and checks a write is refused |
 | `poc/run_poc.py` | Runs every step and writes `results/summary.md` |
 | `.github/workflows/poc.yml` | Runs the PoC on every push, against StarRocks in a service container |
+| `docs/poc_report.md` | The PoC report |
 
 ## Running it yourself
 
