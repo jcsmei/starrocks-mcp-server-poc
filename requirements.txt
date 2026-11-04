@@ -1,0 +1,5 @@
+# What the PoC needs.  StarRocks itself runs in Docker; see README.md.
+httpx==0.28.1
+mcp==2.3.0
+openpyxl==3.1.5
+pymysql==1.2.3

@@ -1,0 +1,7 @@
+# Output of a local run; the CI run keeps its own copy.
+results/
+
+# Local settings
+.env
+.venv/
+__pycache__/

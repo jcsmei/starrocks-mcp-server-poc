@@ -1,0 +1,59 @@
+# Run the whole PoC against a real StarRocks on every push: start the
+# official all-in-one container, create the schema, load the
+# workbooks, run every check, and use the official MCP server as the
+# read-only agent user.  The results appear on the run's summary page
+# and are kept as an artifact.
+name: StarRocks PoC
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  poc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    services:
+      starrocks:
+        # Pinned, so results can be reproduced.
+        image: starrocks/allin1-ubuntu:4.1.7
+        ports:
+          - 9030:9030   # queries, over the MySQL protocol
+          - 8030:8030   # frontend HTTP
+          - 8040:8040   # backend HTTP, used by Stream Load
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # Runs the official StarRocks MCP server.
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      # A fresh password for the read-only agent user on every run,
+      # hidden from the logs.
+      - name: Create the agent user's password
+        run: |
+          password=$(openssl rand -hex 16)
+          echo "::add-mask::$password"
+          echo "AGENT_PASSWORD=$password" >> "$GITHUB_ENV"
+
+      - name: Run the PoC
+        env:
+          RUN_PLACE: GitHub Actions
+        run: python poc/run_poc.py
+
+      - name: Keep the results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: poc-results
+          path: results/
