@@ -15,6 +15,11 @@ from mcp import Client, StdioServerParameters
 import db
 
 SERVER_VERSION = "0.4.0"
+# Release 0.4.0 imports fastmcp.tools.tool, which fastmcp 3.2 removed,
+# but it does not cap fastmcp's version, so a fresh install fails at
+# startup.  The fix is on the server's main branch but not released
+# yet.  3.1.1 is the newest fastmcp that still has the module.
+FASTMCP_VERSION = "3.1.1"
 
 
 def text_of(result):
@@ -30,6 +35,7 @@ async def run_checks():
     params = StdioServerParameters(
         command="uv",
         args=["run", "--with", f"mcp-server-starrocks=={SERVER_VERSION}",
+              "--with", f"fastmcp=={FASTMCP_VERSION}",
               "mcp-server-starrocks"],
         env={**os.environ, "STARROCKS_URL": url,
              "STARROCKS_QUERY_TIMEOUT": "10"},

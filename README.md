@@ -55,7 +55,9 @@ AGENT_PASSWORD=choose-a-password python poc/run_poc.py
 ```
 
 To query the data from Claude Code through the MCP server, add the
-server to `.mcp.json` with the read-only user:
+server to `.mcp.json` with the read-only user. The fastmcp pin is
+needed: the server's 0.4.0 release fails to start with fastmcp 3.2 or
+later.
 
 ```json
 {
@@ -63,7 +65,7 @@ server to `.mcp.json` with the read-only user:
     "starrocks": {
       "command": "uv",
       "args": ["run", "--with", "mcp-server-starrocks==0.4.0",
-               "mcp-server-starrocks"],
+               "--with", "fastmcp==3.1.1", "mcp-server-starrocks"],
       "env": {
         "STARROCKS_URL": "agent_reader:choose-a-password@127.0.0.1:9030/poc"
       }
