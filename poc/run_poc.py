@@ -41,7 +41,7 @@ def main():
     db.wait_until_ready()
     with db.connect() as admin:
         _, version = db.query(admin, "SELECT current_version()")
-        report.append(f"# StarRocks PoC results\n\nStarRocks "
+        report.append(f"# StarRocks MCP Server PoC: results\n\nStarRocks "
                       f"{version[0][0]}, run in "
                       f"{os.environ.get('RUN_PLACE', 'a local container')}.")
 

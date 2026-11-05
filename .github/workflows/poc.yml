@@ -3,7 +3,7 @@
 # workbooks, run every check, and use the official MCP server as the
 # read-only agent user.  The results appear on the run's summary page
 # and are kept as an artifact.
-name: StarRocks PoC
+name: StarRocks MCP Server PoC
 
 on:
   push:

@@ -1,4 +1,4 @@
-# PoC report: governed AI-agent access to marketing analytics in StarRocks
+# StarRocks MCP Server PoC: report
 
 | | |
 |---|---|

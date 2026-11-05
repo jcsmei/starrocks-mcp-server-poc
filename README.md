@@ -1,6 +1,6 @@
-# StarRocks PoC: governed AI-agent access to marketing analytics
+# StarRocks MCP Server PoC
 
-[![StarRocks PoC](https://github.com/jcsmei/starrocks-agentic-poc/actions/workflows/poc.yml/badge.svg)](https://github.com/jcsmei/starrocks-agentic-poc/actions/workflows/poc.yml)
+[![StarRocks MCP Server PoC](https://github.com/jcsmei/starrocks-mcp-server-poc/actions/workflows/poc.yml/badge.svg)](https://github.com/jcsmei/starrocks-mcp-server-poc/actions/workflows/poc.yml)
 
 A proof of concept that loads multi-tab marketing workbooks into
 StarRocks as a small star schema, and gives an AI agent read-only
